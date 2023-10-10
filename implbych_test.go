@@ -1,4 +1,4 @@
-package qbench_test
+package main_test
 
 import (
 	"context"
@@ -10,28 +10,28 @@ import (
 )
 
 func Test_chImpl(t *testing.T) {
-	q := qbench.NewChImpl(500)
+	q := main.NewChImpl(500)
 	ctx := context.Background()
 
 	assertFIFOInSPSC(t, ctx, q)
 }
 
 func Test_chImpl_MPSC(t *testing.T) {
-	q := qbench.NewChImpl(500)
+	q := main.NewChImpl(500)
 	ctx := context.Background()
 
 	assertMPSC(t, ctx, q)
 }
 
 func Test_chImpl_SPMC(t *testing.T) {
-	q := qbench.NewChImpl(500)
+	q := main.NewChImpl(500)
 	ctx := context.Background()
 
 	assertSPMC(t, ctx, q)
 }
 
 // assertFIFOInSPSC asserts that the queue is FIFO in a single producer, single consumer scenario.
-func assertFIFOInSPSC(t *testing.T, ctx context.Context, q qbench.Queue) {
+func assertFIFOInSPSC(t *testing.T, ctx context.Context, q main.Queue) {
 	wg := sync.WaitGroup{}
 	wg.Add(2)
 
@@ -98,7 +98,7 @@ func assertFIFOInSPSC(t *testing.T, ctx context.Context, q qbench.Queue) {
 	}
 }
 
-func assertMPSC(t *testing.T, ctx context.Context, q qbench.Queue) {
+func assertMPSC(t *testing.T, ctx context.Context, q main.Queue) {
 	wg := sync.WaitGroup{}
 
 	go func() {
@@ -171,7 +171,7 @@ func assertMPSC(t *testing.T, ctx context.Context, q qbench.Queue) {
 	}
 }
 
-func assertSPMC(t *testing.T, ctx context.Context, q qbench.Queue) {
+func assertSPMC(t *testing.T, ctx context.Context, q main.Queue) {
 	wg := sync.WaitGroup{}
 
 	go func() {

@@ -1,4 +1,4 @@
-package qbench
+package main
 
 import "context"
 
