@@ -1,37 +1,14 @@
-package main_test
+package contract
 
 import (
 	"context"
 	"strconv"
 	"sync"
 	"testing"
-
-	"qbench"
 )
 
-func Test_chImpl(t *testing.T) {
-	q := main.NewChImpl(500)
-	ctx := context.Background()
-
-	assertFIFOInSPSC(t, ctx, q)
-}
-
-func Test_chImpl_MPSC(t *testing.T) {
-	q := main.NewChImpl(500)
-	ctx := context.Background()
-
-	assertMPSC(t, ctx, q)
-}
-
-func Test_chImpl_SPMC(t *testing.T) {
-	q := main.NewChImpl(500)
-	ctx := context.Background()
-
-	assertSPMC(t, ctx, q)
-}
-
-// assertFIFOInSPSC asserts that the queue is FIFO in a single producer, single consumer scenario.
-func assertFIFOInSPSC(t *testing.T, ctx context.Context, q main.Queue) {
+// AssertFIFOInSPSC asserts that the queue is FIFO in a single producer, single consumer scenario.
+func AssertFIFOInSPSC(t *testing.T, ctx context.Context, q Queue) {
 	wg := sync.WaitGroup{}
 	wg.Add(2)
 
@@ -98,7 +75,7 @@ func assertFIFOInSPSC(t *testing.T, ctx context.Context, q main.Queue) {
 	}
 }
 
-func assertMPSC(t *testing.T, ctx context.Context, q main.Queue) {
+func AssertMPSC(t *testing.T, ctx context.Context, q Queue) {
 	wg := sync.WaitGroup{}
 
 	go func() {
@@ -171,7 +148,7 @@ func assertMPSC(t *testing.T, ctx context.Context, q main.Queue) {
 	}
 }
 
-func assertSPMC(t *testing.T, ctx context.Context, q main.Queue) {
+func AssertSPMC(t *testing.T, ctx context.Context, q Queue) {
 	wg := sync.WaitGroup{}
 
 	go func() {

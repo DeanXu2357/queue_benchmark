@@ -1,8 +1,10 @@
-package main
+package implbych
 
 import (
 	"context"
 	"time"
+
+	"qbench/contract"
 )
 
 /**
@@ -30,6 +32,6 @@ func (c *chImpl) Close(ctx context.Context) error {
 	return nil
 }
 
-func NewChImpl(s int64) Queue {
+func NewChImpl(s int64) contract.Queue {
 	return &chImpl{ch: make(chan string, s)}
 }

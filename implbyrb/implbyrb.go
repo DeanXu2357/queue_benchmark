@@ -1,8 +1,10 @@
-package main
+package implbyrb
 
 import (
 	"context"
 	"sync"
+
+	"qbench/contract"
 )
 
 /**
@@ -69,7 +71,7 @@ func (r *rbImpl) Close(ctx context.Context) error {
 	return nil
 }
 
-func NewRingBufferImpl(s int64) Queue {
+func NewRingBufferImpl(s int64) contract.Queue {
 	b := make([]string, s)
 	m := sync.Mutex{}
 
